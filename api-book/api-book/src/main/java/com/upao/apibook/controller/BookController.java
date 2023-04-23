@@ -5,6 +5,7 @@ import com.upao.apibook.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,7 +24,15 @@ public class BookController {
     }
 
     @PostMapping
+    public ResponseEntity<Book> addBook(@RequestParam String title,
+                                        @RequestParam String author,
+                                        @RequestParam String description,
+                                        @RequestParam MultipartFile image){
+        Book book1 = bookService.createBook(title,author,description,image);
+        return ResponseEntity.ok(book1);
+    }
+    /*Modificamos tambien este metodo
     public ResponseEntity<Book> addBook(@RequestBody Book book){
         return new ResponseEntity<Book>(bookService.createBook(book),HttpStatus.CREATED);
-    }
+    }*/
 }
